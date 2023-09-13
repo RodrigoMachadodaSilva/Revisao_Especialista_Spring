@@ -101,7 +101,7 @@ public class RestauranteController {
 
 		dadosOrigem.forEach((nomePropriedade, valorPropriedade) -> {
 			Field field = ReflectionUtils.findField(Restaurante.class, nomePropriedade);
-			field.setAccessible(true);
+			field.setAccessible(true); // Permite quebrar o acesso privado da classe
 
 			Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
 

@@ -3,12 +3,14 @@ package com.rodrigo.api_delivery.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.rodrigo.api_delivery.exception.EntidadeEmUsoException;
 import com.rodrigo.api_delivery.exception.EntidadeNaoEncontradaException;
 import com.rodrigo.api_delivery.model.Cozinha;
 import com.rodrigo.api_delivery.repository.CozinhaRepository;
 
+@Service
 public class CozinhaService {
 	
 	@Autowired
