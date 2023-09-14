@@ -9,4 +9,6 @@ public interface RestaurateRepositoryCustomized {
 
 	List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
 
+	List<Restaurante> findWithCriteria(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
+
 }
