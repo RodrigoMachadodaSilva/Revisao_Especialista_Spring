@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rodrigo.api_delivery.exception.EntidadeNaoEncontradaException;
+import com.rodrigo.api_delivery.infraestructure.reposository.spec.RestauranteComFreteGratisSpec;
+import com.rodrigo.api_delivery.infraestructure.reposository.spec.RestauranteComNomeSemelhanteSpec;
 import com.rodrigo.api_delivery.model.Restaurante;
 import com.rodrigo.api_delivery.repository.RestauranteRepository;
 import com.rodrigo.api_delivery.service.RestauranteService;
@@ -68,7 +70,7 @@ public class RestauranteController {
 			Restaurante restauranteAtual = restauranteRepository.findById(restauranteId).orElse(null);
 
 			if (restauranteAtual != null) {
-				BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
+				BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento");
 
 				restauranteAtual = restauranteService.salvar(restauranteAtual);
 				return ResponseEntity.ok(restauranteAtual);
@@ -109,6 +111,13 @@ public class RestauranteController {
 
 			ReflectionUtils.setField(field, restauranteDestino, novoValor);
 		});
+	}
+	
+	@GetMapping("/restaurantes/com-frete-gratis")
+	public List<Restaurante> restaurantesComFreteGratis(String nome) {
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
 	}
 
 }
