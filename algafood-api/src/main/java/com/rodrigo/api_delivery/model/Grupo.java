@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,8 @@ public class Grupo {
 
 	private String nome;
 	
-    @JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "grupo_id"),inverseJoinColumns = @JoinColumn(name = "permissao_id"))
+	@ManyToMany
+	@JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "grupo_id"),inverseJoinColumns = @JoinColumn(name = "permissao_id"))
 	private List<Permissao> permissoes = new ArrayList<>();
 
 }
